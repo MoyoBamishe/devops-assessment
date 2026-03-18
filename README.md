@@ -43,6 +43,7 @@ devops-assessment/
 ```
 
 **Steps to Run Locally**
+
 To run the services on local machine for debugging purposes:
 
 > Note: Running locally on Windows may encounter Go/SQLite or Node dependency issues. Docker is recommended.
