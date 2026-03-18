@@ -115,7 +115,7 @@ I added a custom Nginx config to handle Angular routing properly. Instead of ret
 **Deployment IP:** 144.21.53.104
 
 
-**Technical Decisions:**
+##Technical Decisions:
 
 **Service Health Checks:** Added a health check for Postgres and configured the backend to wait until the DB is ready before connecting. This avoids startup crashes caused by timing issues.
 
