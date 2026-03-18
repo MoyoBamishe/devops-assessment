@@ -83,7 +83,7 @@ docker compose ps
 <img width="1920" height="1080" alt="Screenshot (21)" src="https://github.com/user-attachments/assets/c274fbf4-25f0-4729-9d59-8bc0167efcce" />
 
 
-**Deployment Implementation:**
+## **Deployment Implementation:**
 
 1. **Database Deployment:**
 
@@ -115,11 +115,14 @@ I added a custom Nginx config to handle Angular routing properly. Instead of ret
 **Deployment IP:** 144.21.53.104
 
 
-**Technical Decisions & Rationale:**
+**Technical Decisions:**
 
 **Service Health Checks:** Added a health check for Postgres and configured the backend to wait until the DB is ready before connecting. This avoids startup crashes caused by timing issues.
+
 **Multi-Stage Dockerfiles:** Used multi-stage builds for both Go and Angular to keep the final images smaller and more secure by leaving out build tools and source files.
+
 **Environment Variables:** Centralized the DATABASE_URL to make switching between local and container environments seamless.
+
 **Nginx Setup:** Exposed the frontend on port 80 so the app is accessible over standard HTTP.
 
 
