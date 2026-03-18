@@ -1,0 +1,31 @@
+name: CI Build and Stack Test
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  test-stack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Start the Stack
+        # This builds and starts everything
+        run: docker compose up -d --build
+
+      - name: Wait for Services
+        # Give the DB 15 seconds to initialize
+        run: sleep 15
+
+      - name: Check Container Status
+        # Lists the containers to prove they are "Up"
+        run: docker compose ps
+
+      - name: Logs (for debugging if it fails)
+        if: failure()
+        run: docker compose logs
+
+      - name: Tear Down
+        run: docker compose down
