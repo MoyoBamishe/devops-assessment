@@ -91,6 +91,10 @@ docker compose ps
 -I used Docker volumes to ensure database state is preserved across container restarts.
 -Credentials are handled through environment variables, keeping things a bit safer and easier to manage.
 
+**Configuring Postgres db via Docker Compose:**
+<img width="1920" height="1080" alt="Screenshot (24)" src="https://github.com/user-attachments/assets/229789f6-48bc-49c7-9613-c58cd1c6322e" />
+
+
 
 2. **CI/CD Pipeline (GitHub Actions):**
 
@@ -115,7 +119,7 @@ I added a custom Nginx config to handle Angular routing properly. Instead of ret
 **Deployment IP:** 144.21.53.104
 
 
-##Technical Decisions:
+## Technical Decisions:
 
 **Service Health Checks:** Added a health check for Postgres and configured the backend to wait until the DB is ready before connecting. This avoids startup crashes caused by timing issues.
 
