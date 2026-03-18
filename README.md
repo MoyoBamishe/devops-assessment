@@ -103,6 +103,11 @@ I set up a CI pipeline in .github/workflows/ci.yml to automatically validate the
 - Confirms that the frontend, backend, and database all come up correctly and can communicate without issues
 - This helps catch integration problems early and ensures the whole system is always in a working state.
 
+**Successful CI Pipeline usig GitHub Actions:**
+<img width="1920" height="1080" alt="Screenshot (25)" src="https://github.com/user-attachments/assets/6e2b3840-e175-4201-99af-510255a7dc5e" />
+
+
+
 
 3. **Nginx Configuration:**
 
