@@ -90,8 +90,6 @@ docker compose ps
 
 - The database is deployed via the db service in docker-compose.yml.
 
-- I used Docker volumes to ensure database state is preserved across container restarts.
-
 - Credentials are handled through environment variables, keeping things a bit safer and easier to manage.
 
 **Configuring Postgres db via Docker Compose:**
@@ -117,7 +115,8 @@ I set up a CI pipeline in .github/workflows/ci.yml to automatically validate the
 
 3. **Nginx Configuration:**
 
-I added a custom Nginx config to handle Angular routing properly. Instead of returning a 404 on page refresh or direct URL access, requests are redirected to index.html, allowing the app to manage routing..
+I added a custom Nginx config to handle Angular routing properly. Instead of returning a 404 on page refresh or direct URL access, requests are redirected to index.html, allowing the app to manage routing.
+
 **nginx.conf file:**
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/11f2b149-bc13-4f44-9ab4-8857e679620a" />
 
