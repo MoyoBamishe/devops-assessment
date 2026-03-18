@@ -29,3 +29,5 @@ jobs:
 
       - name: Tear Down
         run: docker compose down
+
+        
