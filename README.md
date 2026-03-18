@@ -87,11 +87,11 @@ docker compose ps
 
 1. **Database Deployment:**
 
--The database is deployed via the db service in docker-compose.yml.
+- The database is deployed via the db service in docker-compose.yml.
 
--I used Docker volumes to ensure database state is preserved across container restarts.
+- I used Docker volumes to ensure database state is preserved across container restarts.
 
--Credentials are handled through environment variables, keeping things a bit safer and easier to manage.
+- Credentials are handled through environment variables, keeping things a bit safer and easier to manage.
 
 **Configuring Postgres db via Docker Compose:**
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/61c3c4ea-9e53-4346-a1f5-c2e1fea9c7ac" />
