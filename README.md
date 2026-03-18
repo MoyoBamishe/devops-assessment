@@ -92,7 +92,7 @@ docker compose ps
 -Credentials are handled through environment variables, keeping things a bit safer and easier to manage.
 
 **Configuring Postgres db via Docker Compose:**
-<img width="1920" height="1080" alt="Screenshot (24)" src="https://github.com/user-attachments/assets/229789f6-48bc-49c7-9613-c58cd1c6322e" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/61c3c4ea-9e53-4346-a1f5-c2e1fea9c7ac" />
 
 
 
