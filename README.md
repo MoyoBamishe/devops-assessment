@@ -6,7 +6,7 @@ The objective is to **containerize and deploy the application** using Docker, an
 
 **Architecture Overview**
 
-The system is structured as a simple multi-tier setup.
+The system is structured as a simple multi-tier setup. 
 
 * **Frontend (Presentation Layer):**
   An Angular single-page app served through Nginx, responsible for everything the user interacts with.
