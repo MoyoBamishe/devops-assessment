@@ -79,3 +79,38 @@ docker-compose up -d --build
 ```bash
 docker compose ps
 ```
+**Built Images for both Frontend and Backend:**
+<img width="1920" height="1080" alt="Screenshot (21)" src="https://github.com/user-attachments/assets/c274fbf4-25f0-4729-9d59-8bc0167efcce" />
+
+
+**Deployment Implementation:**
+
+1. **Database Deployment:**
+
+-The database is deployed via the db service in docker-compose.yml.
+-I used Docker volumes to ensure database state is preserved across container restarts.
+-Credentials are handled through environment variables, keeping things a bit safer and easier to manage.
+
+
+2. **CI/CD Pipeline (GitHub Actions):**
+
+I set up a CI pipeline in .github/workflows/ci.yml to automatically validate the project on every push to the master branch.
+- It Builds and starts the full stack using docker compose up --build
+- Confirms that the frontend, backend, and database all come up correctly and can communicate without issues
+- This helps catch integration problems early and ensures the whole system is always in a working state.
+
+
+3. **Nginx Configuration:**
+
+I added a custom Nginx config to handle Angular routing properly. Instead of returning a 404 on page refresh or direct URL access, requests are redirected to index.html, allowing the app to manage routing.
+
+
+
+
+**Public URLs & Server Details:**
+
+**Frontend:** http://moyo.nqb8.co
+
+**API/Backend:** http://api.moyo.nqb8.co
+
+**Deployment IP:** 144.21.53.104
