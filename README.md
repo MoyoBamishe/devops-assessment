@@ -21,7 +21,7 @@ The system is structured as a simple multi-tier setup.
   All services communicate over a dedicated Docker network. The backend talks to the database internally (e.g., `db:5432`), while the database itself isn’t exposed to the public, which adds an extra layer of security.
 
  ## Folder Structure
-
+```text
 devops-assessment/
 │
 ├─ backend/ # Go API repo
