@@ -106,7 +106,6 @@ I added a custom Nginx config to handle Angular routing properly. Instead of ret
 
 
 
-
 **Public URLs & Server Details:**
 
 **Frontend:** http://moyo.nqb8.co
@@ -114,3 +113,22 @@ I added a custom Nginx config to handle Angular routing properly. Instead of ret
 **API/Backend:** http://api.moyo.nqb8.co
 
 **Deployment IP:** 144.21.53.104
+
+
+**Technical Decisions & Rationale:**
+
+**Service Health Checks:** Added a health check for Postgres and configured the backend to wait until the DB is ready before connecting. This avoids startup crashes caused by timing issues.
+**Multi-Stage Dockerfiles:** Used multi-stage builds for both Go and Angular to keep the final images smaller and more secure by leaving out build tools and source files.
+**Environment Variables:** Centralized the DATABASE_URL to make switching between local and container environments seamless.
+**Nginx Setup:** Exposed the frontend on port 80 so the app is accessible over standard HTTP.
+
+
+
+
+
+
+
+
+
+
+
