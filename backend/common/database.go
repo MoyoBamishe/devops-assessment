@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"gorm.io/driver/postgres" // Added for Postgres support
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -17,7 +18,6 @@ type Database struct {
 var DB *gorm.DB
 
 // GetDBPath returns the database path from environment or default.
-// Exported for use in tests.
 func GetDBPath() string {
 	dbPath := os.Getenv("DB_PATH")
 	if dbPath == "" {
@@ -27,7 +27,6 @@ func GetDBPath() string {
 }
 
 // GetTestDBPath returns the test database path from environment or default.
-// Exported for use in tests.
 func GetTestDBPath() string {
 	testDBPath := os.Getenv("TEST_DB_PATH")
 	if testDBPath == "" {
@@ -45,19 +44,35 @@ func ensureDir(filePath string) error {
 	return nil
 }
 
-// Opening a database and save the reference to `Database` struct.
+// Init opens a database and saves the reference to the `Database` struct.
 func Init() *gorm.DB {
-	dbPath := GetDBPath()
+	var db *gorm.DB
+	var err error
+	dbURL := os.Getenv("DATABASE_URL")
 
-	// Ensure the directory exists
-	if err := ensureDir(dbPath); err != nil {
-		fmt.Println("db err: (Init - create dir) ", err)
+	// DEBUG: Verify exactly what the app sees as the connection string
+	fmt.Println("DEBUG: The DSN value is:", dbURL)
+
+	if dbURL != "" {
+		// Try connecting to Postgres if DATABASE_URL is provided
+		fmt.Println("Connecting to Postgres via DATABASE_URL...")
+		db, err = gorm.Open(postgres.Open(dbURL), &gorm.Config{})
+	} else {
+		// Fallback to original SQLite logic
+		dbPath := GetDBPath()
+		if err := ensureDir(dbPath); err != nil {
+			fmt.Println("db err: (Init - create dir) ", err)
+		}
+		fmt.Println("Connecting to SQLite...")
+		db, err = gorm.Open(sqlite.Open(dbPath), &gorm.Config{})
 	}
 
-	db, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{})
 	if err != nil {
 		fmt.Println("db err: (Init) ", err)
+		// If it errors here, return early to prevent nil pointer crashes later
+		return nil 
 	}
+
 	sqlDB, err := db.DB()
 	if err != nil {
 		fmt.Println("db err: (Init - get sql.DB) ", err)
@@ -68,11 +83,9 @@ func Init() *gorm.DB {
 	return DB
 }
 
-// This function will create a temporarily database for running testing cases
+// TestDBInit creates a temporary database for running testing cases
 func TestDBInit() *gorm.DB {
 	testDBPath := GetTestDBPath()
-
-	// Ensure the directory exists
 	if err := ensureDir(testDBPath); err != nil {
 		fmt.Println("db err: (TestDBInit - create dir) ", err)
 	}
@@ -93,7 +106,7 @@ func TestDBInit() *gorm.DB {
 	return DB
 }
 
-// Delete the database after running testing cases.
+// TestDBFree deletes the database after running testing cases.
 func TestDBFree(test_db *gorm.DB) error {
 	sqlDB, err := test_db.DB()
 	if err != nil {
@@ -107,7 +120,7 @@ func TestDBFree(test_db *gorm.DB) error {
 	return err
 }
 
-// Using this function to get a connection, you can create your connection pool here.
+// GetDB is used to get a connection pool.
 func GetDB() *gorm.DB {
 	return DB
 }
