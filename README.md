@@ -141,9 +141,27 @@ I added a custom Nginx config to handle Angular routing properly. Instead of ret
 
 **Nginx Setup:** Exposed the frontend on port 80 so the app is accessible over standard HTTP.
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+## Server/Live Deployment Notes:
 
+The application is fully containerized and the system is running, but there is a display issue with the styles.
+
+* **Design Issue:**
+During the final step of building the project, the styling (CSS) file was generated as an empty file. This makes the website appear in black and white.
+
+* **Priority:**
+I focused on ensuring the Server, the Database, and the API all connect and work correctly. In a DevOps role, making sure the system is "up" and communicating is the most important part.
+
+* **Functionality:**
+All the buttons and features are still connected to the backend, even though the colors are missing.
+
+**Infrastructure:**
+
+* **Reverse Proxy:** Nginx is configured to handle the frontend and route `/api` requests to the Go backend.
+* **Containerization:** Used multi-stage Docker builds to keep image sizes small and secure.
+* **Resilience:** Database persistence is handled via Docker volumes to ensure data survives container restarts.
 
 
 
